@@ -9,6 +9,25 @@ readme = "README.md"
 python = "^3.9"
 langchain = "^0.0.339"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^6.2"
+pytest-cov = "^2.11"
+pytest-mock = "^3.6"
+pytest-pylint = "^0.18"
+pytest-xdist = "^2.2"
+pytest-asyncio = "^0.14"
+pylint = "^2.7"
+black = "^23.11"
+flake8 = "^3.8.4"
+mypy = "^1.7.0"
+pre-commit = "^3.5"
+isort = "^5.7.0"
+wheel = "^0.36.2"
+twine = "^3.4.1"
+pydantic = "^1.8.2"
+attrs = "^20.3.0"
+pyyaml = "^5.4.1"
+aiofiles = "^0.7.0"
 
 [build-system]
 requires = ["poetry-core"]
