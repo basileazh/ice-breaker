@@ -64,7 +64,7 @@ repos:
     rev: v3.7.0
     hooks:
       - id: pyupgrade
-        args: [--py311-plus]
+        args: [--py39-plus]
   - repo: https://github.com/asottile/yesqa
     rev: v1.4.0
     hooks:
@@ -73,11 +73,11 @@ repos:
           - flake8-bugbear==22.8.23
           - flake8-comprehensions==3.10.0
           - flake8-docstrings==1.6.0
-#  - repo: https://github.com/hadialqattan/pycln
-#    rev: v2.1.1
-#    hooks:
-#      - id: pycln
-#        args: [--all]
+  - repo: https://github.com/hadialqattan/pycln
+    rev: v2.1.1
+    hooks:
+      - id: pycln
+        args: [--all]
 
 # Git Helpers
 #  - repo: https://github.com/commitizen-tools/commitizen
