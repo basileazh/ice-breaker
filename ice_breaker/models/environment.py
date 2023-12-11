@@ -20,7 +20,7 @@ class EnvironmentMode(BaseModel):
     mode: Environment
 
     @field_validator("mode")
-    def check_mode(self, v: str):
+    def check_mode(cls, v: str):
         if v not in [
             "development",
             "production",
