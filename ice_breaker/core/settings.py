@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 
 class Settings(BaseConfig):
     # Logging
-    log_file_path = "outputs/logs/[DATETIME_PLACEHOLDER]_log.txt"
+    log_file_path = os.path.join(DIR, "outputs/logs/[DATETIME_PLACEHOLDER]_log.txt")
     log_file_path_datetime_format = "%Y-%m-%d_%H"
     log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
@@ -24,10 +24,13 @@ class Settings(BaseConfig):
     if os.getenv("ENVIRONMENT") == "production":
         linkedin_api_endpoint = os.getenv("PROXYCURL_API_ENDPOINT")
         linkedin_api_key = os.getenv("PROXYCURL_API_KEY")
-    else:
-        path_to_linkedin_sample_profile = os.path.join(DIR, "test", "linkedin_sample_profile.json")
+    path_to_linkedin_sample_profile = os.path.join(DIR, "test", "linkedin_sample_profile.json")
 
     # Twitter API (Apify)
+    if os.getenv("ENVIRONMENT") == "production":
+        twitter_apify_api_key = os.getenv("APIFY_API_KEY")
+    path_to_twitter_sample_profile = os.path.join(DIR, "test", "twitter_sample_profile.json")
+    apify_twitter_actor_id = "quacker/twitter-scraper"
     twitter_fields_user = [
         "name",
         "description",
