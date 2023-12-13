@@ -1,7 +1,11 @@
+import json
+
 import requests  # type: ignore[import]
 
 from ice_breaker.core.settings import get_settings
 from ice_breaker.models.environment import Environment
+
+path_to_linkedin_sample_profile_default = get_settings("path_to_linkedin_sample_profile")
 
 
 def scrape_linkedin_profile(linkedin_profile_url="", mode: str = "development") -> dict[str, str]:
@@ -54,9 +58,6 @@ def _scrape_linkedin_profile_production(linkedin_profile_url: str) -> dict[str, 
     return response.json()
 
 
-path_to_linkedin_sample_profile_default = get_settings("path_to_linkedin_sample_profile")
-
-
 def _scrape_linkedin_profile_development(
     path_to_linkedin_sample_profile: str = path_to_linkedin_sample_profile_default,
 ) -> dict[(str, str)]:
@@ -90,3 +91,28 @@ def clean_linkedin_profile(linkedin_profile: dict[str, str]) -> dict[str, str]:
             group_dict.pop("profile_pic_url")
 
     return linkedin_profile_clean
+
+
+def download_linkedin_profile(
+    linkedin_profile_url: str, path: str = path_to_linkedin_sample_profile_default, clean_profile: bool = True
+) -> dict[str, str]:
+    """
+    Downloads a LinkedIn profile and returns the information as a dictionary.
+
+    :param linkedin_profile_url: The LinkedIn profile URL to scrape.
+    :param path: The path to the local LinkedIn profile.
+    :param clean_profile: Whether to clean the profile or not
+    :return: A dict containing the LinkedIn profile information.
+    """
+    # Scrape the LinkedIn profile
+    linkedin_profile = _scrape_linkedin_profile_production(linkedin_profile_url)
+
+    if clean_profile:
+        # Clean the LinkedIn profile
+        linkedin_profile = clean_linkedin_profile(linkedin_profile)
+
+    # Save the data to a file
+    with open(path, "w") as f:
+        json.dump(linkedin_profile, f)
+
+    return linkedin_profile
