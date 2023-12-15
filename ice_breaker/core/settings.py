@@ -24,12 +24,12 @@ class Settings(BaseConfig):
     if os.getenv("ENVIRONMENT") == "production":
         linkedin_api_endpoint = os.getenv("PROXYCURL_API_ENDPOINT")
         linkedin_api_key = os.getenv("PROXYCURL_API_KEY")
-    path_to_linkedin_sample_profile = os.path.join(DIR, "test", "linkedin_sample_profile.json")
+    path_to_linkedin_sample_profile = os.path.join(DIR, "data_samples", "linkedin_sample_profile.json")
 
     # Twitter API (Apify)
     if os.getenv("ENVIRONMENT") == "production":
         twitter_apify_api_key = os.getenv("APIFY_API_KEY")
-    path_to_twitter_sample_profile = os.path.join(DIR, "test", "twitter_sample_profile.json")
+    path_to_twitter_sample_profile = os.path.join(DIR, "data_samples", "twitter_sample_profile.json")
     apify_twitter_actor_id = "quacker/twitter-scraper"
     twitter_fields_user = [
         "name",
