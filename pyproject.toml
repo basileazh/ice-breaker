@@ -33,6 +33,7 @@ pyyaml = "^5.4.1"
 aiofiles = "^0.7.0"
 types-requests = "^2.31.0.10"
 jupyter = "^1.0.0"
+types-python-slugify = "^8.0.0.3"
 
 [tool.poetry.group.doc]
 optional = true
@@ -67,3 +68,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 ice-breaker = "ice_breaker.scripts.ice_breaker:ice_breaker"
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs", "build", "dist", ".venv", ".git"]
