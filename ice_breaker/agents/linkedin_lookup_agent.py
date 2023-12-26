@@ -1,20 +1,10 @@
 from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate
-from pydantic import BaseModel, Field
 
 from ice_breaker.tools.tools import get_profile_url
 
-
-class LinkedInLookupInput(BaseModel):
-    """
-    LinkedIn lookup agent input.
-    """
-
-    name: str = Field(
-        title="Name",
-        description="The name to lookup.",
-    )
+# from ice_breaker.models.lookup_input import LookupInput
 
 
 def lookup(profile_name: str) -> str:
@@ -34,6 +24,9 @@ def lookup(profile_name: str) -> str:
     examples of linkedin profile urls:
     https://fr.linkedin.com/in/firstname-lastname-123456789/
     https://fr.linkedin.com/in/john-doe/
+    https://uk.linkedin.com/in/jbgette/
+    https://ca.linkedin.com/in/jack-hill/
+    https://fr.linkedin.com/in/basile-el-azhari/
 
     Your answer should contain only a URL. remove everything that is not a url in your answer.
     only output the url and nothing else.
@@ -56,7 +49,7 @@ def lookup(profile_name: str) -> str:
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             handle_parsing_errors=True,
             description="Useful for when you need to get the LinkedIn profile URL for a given name.",
-            # args_schema=LinkedInLookupInput,
+            # args_schema=LookupInput,
         ),
     ]
 
