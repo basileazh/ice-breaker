@@ -14,13 +14,19 @@ logging.basicConfig(level=logging.INFO)
 
 
 class Settings(BaseConfig):
+    # General
+    DIR = DIR
+    environment = Environment(os.getenv("ENVIRONMENT", "development"))
+
     # Logging
     log_file_path = os.path.join(DIR, "outputs/logs/[DATETIME_PLACEHOLDER]_log.txt")
     log_file_path_datetime_format = "%Y-%m-%d_%H"
-    log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    log_format = "[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s"
+
+    # Profiles
+    profiles_path = os.path.join(DIR, "data_samples")
 
     # LinkedIn API (Proxycurl)
-    environment = Environment(os.getenv("ENVIRONMENT", "development"))
     if os.getenv("ENVIRONMENT") == "production":
         linkedin_api_endpoint = os.getenv("PROXYCURL_API_ENDPOINT")
         linkedin_api_key = os.getenv("PROXYCURL_API_KEY")
