@@ -4,6 +4,7 @@ from typing import Optional, Union
 
 from slugify import slugify  # type: ignore
 
+from ice_breaker.core.log import logger
 from ice_breaker.core.settings import get_settings
 
 # Default values
@@ -47,6 +48,11 @@ class AbstractService:
         :param environment: The mode to use. Can be either "production" or "development".
         :param profiles_path: The path to the profile's folder.
         """
+        logger.info(
+            f"Service setting up with profile_id={profile_id}, "
+            f"environment={environment}, "
+            f"profiles_path={profiles_path}..."
+        )
         self.profile_id = profile_id
         self.environment = environment if environment else DEFAULT_ENVIRONMENT
         self.profiles_path = profiles_path if profiles_path else DEFAULT_PROFILES_PATH
@@ -70,6 +76,7 @@ class AbstractService:
 
         :return: A dict containing the LinkedIn profile information.
         """
+        logger.info(f"Scraping {self.profile_id} profile from local...")
         # Load the data from the file
         profile_data = self._load_profile()
 
@@ -83,6 +90,8 @@ class AbstractService:
         :param force_scraping: Whether to force the scraping using API or not
         :return: A dict containing profile information.
         """
+        logger.info(f"Scraping {self.profile_id} profile...")
+
         # Scrape the profile data depending on the environment
         if (self.environment == "production") | force_scraping:
             profile_data = self._scrape_profile_production()
@@ -90,6 +99,9 @@ class AbstractService:
             profile_data = self._scrape_profile_development()
         else:
             raise ValueError(f"Unknown environment '{self.environment}'")
+
+        logger.info("Scraped profile data.")
+        logger.debug(f"Scraped {self.profile_id} profile : {profile_data}.")
 
         self.profile_data = profile_data
 
@@ -115,8 +127,13 @@ class AbstractService:
         if not self.profile_data:
             raise ValueError("No profile data to clean")
 
+        logger.info(f"Cleaning {self.profile_id} profile...")
+
         clean_profile_data = self._clean_profile(self.profile_data)
         self.profile_data = clean_profile_data
+
+        logger.info("Cleaned profile data.")
+        logger.debug(f"Cleaned {self.profile_id} profile : {clean_profile_data}.")
 
         return clean_profile_data
 
@@ -139,21 +156,28 @@ class AbstractService:
 
         :return: The saved profile information.
         """
+        logger.info(f"Saving {self.profile_id} profile...")
+
         if self.profile_data:
-            return self._save_profile(profile_data=self.profile_data)
+            profile_data = self._save_profile(profile_data=self.profile_data)
+
+            logger.info("Saved profile data.")
+            logger.debug(f"Saved {self.profile_id} profile : {profile_data}.")
+
+            return profile_data
         else:
             raise ValueError("No profile data to save")
 
-    def save_profile_external(
-        self, profile_data: dict[str, Union[str, dict[str, str]]]
-    ) -> dict[str, Union[str, dict[str, str]]]:
-        """
-        Saves the profile information.
-
-        :param profile_data: The profile information to save.
-        :return: The saved profile information.
-        """
-        return self._save_profile(profile_data=profile_data)
+    # def save_profile_external(
+    #     self, profile_data: dict[str, Union[str, dict[str, str]]]
+    # ) -> dict[str, Union[str, dict[str, str]]]:
+    #     """
+    #     Saves the profile information.
+    #
+    #     :param profile_data: The profile information to save.
+    #     :return: The saved profile information.
+    #     """
+    #     return self._save_profile(profile_data=profile_data)
 
     def _load_profile(self) -> dict[str, Union[str, dict[str, str]]]:
         """
@@ -178,8 +202,13 @@ class AbstractService:
 
         :return: The loaded profile information.
         """
+        logger.info(f"Loading {self.profile_id} profile...")
+
         profile_data = self._load_profile()
         self.profile_data = profile_data
+
+        logger.info("Loaded profile data.")
+        logger.debug(f"Loaded {self.profile_id} profile : {profile_data}.")
 
         return profile_data
 
@@ -200,8 +229,12 @@ class AbstractService:
 
         :return: The slug for the profile.
         """
+        # Create the slug
+        logger.info(f"Creating slug for {self.profile_id} profile...")
         slug = slugify(self.profile_id, separator="_")
+        logger.debug(f"Created slug for {self.profile_id} profile : {slug}.")
         clean_slug = self._clean_profile_slug(slug)
+        logger.info(f"Cleaned slug for {self.profile_id} profile : {clean_slug}.")
 
         return clean_slug
 
@@ -211,6 +244,7 @@ class AbstractService:
 
         :return: The path to the profile.
         """
+        logger.info(f"Getting path for {self.profile_id} profile...")
         # Get the slug representing the profile name
         slug = self._get_profile_slug()
 
@@ -219,6 +253,7 @@ class AbstractService:
 
         # Get the path to the profile
         path = os.path.join(self.profiles_path, f"{service_name}__{slug}.json")
+        logger.debug(f"Got path for {self.profile_id} profile : {path}.")
 
         self.profile_path = path
 
@@ -240,10 +275,14 @@ class AbstractService:
         :param force_scraping: Whether to force the scraping using API or not
         :return: A dict containing the profile information.
         """
+        logger.info(f"Downloading {self.profile_id} profile...")
+
         # Scrape the profile
+        logger.info("Scraping profile...")
         profile_data = self.scrape_profile(force_scraping=force_scraping)
 
         # Clean the profile
+        logger.info("Cleaning profile...")
         if clean_profile:
             profile_data_clean = self.clean_profile()
             self.profile_data = profile_data_clean
@@ -251,7 +290,10 @@ class AbstractService:
             profile_data_clean = profile_data
 
         # Save the profile
+        logger.info("Saving profile...")
         if save_profile:
             self.save_profile()
+
+        logger.info("Downloaded profile data.")
 
         return profile_data_clean

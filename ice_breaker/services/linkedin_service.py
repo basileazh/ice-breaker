@@ -3,6 +3,7 @@ from typing import Union
 
 import requests  # type: ignore
 
+from ice_breaker.core.log import logger
 from ice_breaker.core.settings import get_settings
 from ice_breaker.services.abstract_service import AbstractService
 
@@ -31,6 +32,8 @@ class LinkedInService(AbstractService):
     def __init__(self, profile_id: str, environment: str = "development", profiles_path: str = ""):
         super().__init__(profile_id, environment, profiles_path)
 
+        # Set the service name
+        logger.info("Setting up LinkedIn service...")
         self.service_name = "linkedin"
 
     def _scrape_profile_production(self) -> dict[str, Union[str, dict[str, str]]]:
@@ -39,6 +42,8 @@ class LinkedInService(AbstractService):
 
         :return: The LinkedIn profile information as a dictionary.
         """
+        logger.info(f"Scraping {self.profile_id} profile from LinkedIn via ProxyCurl...")
+
         # Get the LinkedIn api endpoint and key
         linkedin_api_endpoint = get_settings("linkedin_api_endpoint")
         linkedin_api_key = get_settings("linkedin_api_key")
@@ -75,7 +80,8 @@ class LinkedInService(AbstractService):
         # Remove profile_pic_url from groups
         if linkedin_profile_clean["groups"] and isinstance(linkedin_profile_clean["groups"], list):
             for group_dict in linkedin_profile_clean["groups"]:
-                group_dict.pop("profile_pic_url")
+                if "profile_pic_url" in group_dict:
+                    group_dict.pop("profile_pic_url")
 
         return linkedin_profile_clean
 
