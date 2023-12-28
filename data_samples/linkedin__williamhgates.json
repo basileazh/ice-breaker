@@ -1,0 +1,145 @@
+{
+  "public_identifier": "williamhgates",
+  "profile_pic_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/person/williamhgates/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20231222%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20231222T192605Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8a964dd8d3deec8a25ca29d22c5c14cb38e520230c34f7a94f35ccad43c877b2",
+  "background_cover_image_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/person/williamhgates/cover?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20231222%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20231222T192605Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3109cec542ed5e9c32edfbbc433cf19e0f4ee84a6ce3a736c6772ce404b45014",
+  "first_name": "Bill",
+  "last_name": "Gates",
+  "full_name": "Bill Gates",
+  "follower_count": 34975660,
+  "occupation": "Co-chair at Bill & Melinda Gates Foundation",
+  "headline": "Co-chair, Bill & Melinda Gates Foundation",
+  "summary": "Co-chair of the Bill & Melinda Gates Foundation. Founder of Breakthrough Energy. Co-founder of Microsoft. Voracious reader. Avid traveler. Active blogger.",
+  "country": "US",
+  "country_full_name": "United States of America",
+  "city": "Seattle",
+  "state": "Washington",
+  "experiences": [
+    {
+      "starts_at": {
+        "day": 1,
+        "month": 1,
+        "year": 1975
+      },
+      "ends_at": null,
+      "company": "Microsoft",
+      "company_linkedin_profile_url": "https://www.linkedin.com/company/1035/",
+      "title": "Co-founder",
+      "description": null,
+      "location": null,
+      "logo_url": "https://media.licdn.com/dms/image/C560BAQE88xCsONDULQ/company-logo_400_400/0/1630652622688/microsoft_logo?e=1710979200&v=beta&t=ame7vvlM7SarsR2NmrIp1tZfHX_BCGknrb8xsqQGKiE"
+    },
+    {
+      "starts_at": {
+        "day": 1,
+        "month": 1,
+        "year": 2015
+      },
+      "ends_at": null,
+      "company": "Breakthrough Energy ",
+      "company_linkedin_profile_url": "https://www.linkedin.com/company/19141006/",
+      "title": "Founder",
+      "description": null,
+      "location": null,
+      "logo_url": "https://media.licdn.com/dms/image/C4D0BAQGwD9vNu044FA/company-logo_400_400/0/1630531940051/breakthrough_energy_ventures_logo?e=1710979200&v=beta&t=G4U2CpD-y8BWE6l_MnJs87NOGxcRCJ8j0yYSKCLymgw"
+    },
+    {
+      "starts_at": {
+        "day": 1,
+        "month": 1,
+        "year": 2000
+      },
+      "ends_at": null,
+      "company": "Bill & Melinda Gates Foundation",
+      "company_linkedin_profile_url": "https://www.linkedin.com/company/8736/",
+      "title": "Co-chair",
+      "description": null,
+      "location": null,
+      "logo_url": "https://media.licdn.com/dms/image/C4E0BAQE7Na_mKQhIJg/company-logo_400_400/0/1633731811337/bill__melinda_gates_foundation_logo?e=1710979200&v=beta&t=XLTNHaWJMqAcKW_yXYO9Ht_K1B4Rk5pxjyFjiq0uBSU"
+    }
+  ],
+  "education": [
+    {
+      "starts_at": {
+        "day": 1,
+        "month": 1,
+        "year": 1973
+      },
+      "ends_at": {
+        "day": 31,
+        "month": 12,
+        "year": 1975
+      },
+      "field_of_study": null,
+      "degree_name": null,
+      "school": "Harvard University",
+      "school_linkedin_profile_url": "https://www.linkedin.com/company/1646/",
+      "description": null,
+      "logo_url": "https://media.licdn.com/dms/image/C4E0BAQF5t62bcL0e9g/company-logo_400_400/0/1631318058235?e=1710979200&v=beta&t=FyKbn_qcG8MY4RCVg2wIr0jJCrPOjQM7uhNY3Ewb-70",
+      "grade": null,
+      "activities_and_societies": null
+    },
+    {
+      "starts_at": null,
+      "ends_at": null,
+      "field_of_study": null,
+      "degree_name": null,
+      "school": "Lakeside School",
+      "school_linkedin_profile_url": "https://www.linkedin.com/company/30288/",
+      "description": null,
+      "logo_url": "https://media.licdn.com/dms/image/D560BAQGFmOQmzpxg9A/company-logo_400_400/0/1683732883164/lakeside_school_logo?e=1710979200&v=beta&t=kYEfJx-fD54VYnjRSi-QrYGXUxa-ZvGfL07cFXLxHCA",
+      "grade": null,
+      "activities_and_societies": null
+    }
+  ],
+  "languages": [],
+  "accomplishment_organisations": [],
+  "accomplishment_publications": [],
+  "accomplishment_honors_awards": [],
+  "accomplishment_patents": [],
+  "accomplishment_courses": [],
+  "accomplishment_projects": [],
+  "accomplishment_test_scores": [],
+  "volunteer_work": [],
+  "certifications": [],
+  "connections": 9,
+  "people_also_viewed": [],
+  "recommendations": [],
+  "activities": [],
+  "similarly_named_profiles": [
+    {
+      "name": "Bill Gates",
+      "link": "https://www.linkedin.com/in/bill-gates-610",
+      "summary": "Looking for connections within the IT field.",
+      "location": "Whitehall, PA"
+    },
+    {
+      "name": "Bill Gates",
+      "link": "https://www.linkedin.com/in/bill-gates-50939b1a1",
+      "summary": "Janitor at Bill Gates Associates",
+      "location": "Tompkins County, NY"
+    },
+    {
+      "name": "Bill Gates",
+      "link": "https://www.linkedin.com/in/bill-gates-b3320919",
+      "summary": "GATES Solid Gold Investments ,Inc  LLC",
+      "location": "Santa Rosa, CA"
+    },
+    {
+      "name": "Bill Gates",
+      "link": "https://www.linkedin.com/in/bill-gates-03935451",
+      "summary": "President & CEO at Bedford Materials, AIM Global Logistics",
+      "location": "Boca Raton, FL"
+    }
+  ],
+  "articles": [],
+  "groups": [],
+  "skills": [],
+  "inferred_salary": null,
+  "gender": null,
+  "birth_date": null,
+  "industry": null,
+  "extra": null,
+  "interests": [],
+  "personal_emails": [],
+  "personal_numbers": []
+}
