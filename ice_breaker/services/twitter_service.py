@@ -1,4 +1,3 @@
-import re
 from typing import Union
 
 import requests  # type: ignore
@@ -8,7 +7,7 @@ from ice_breaker.core.settings import get_settings
 from ice_breaker.services.abstract_service import AbstractService
 
 
-class LinkedInService(AbstractService):
+class TwitterService(AbstractService):
     """
     LinkedIn service class for scraping LinkedIn profiles.
 
@@ -84,19 +83,3 @@ class LinkedInService(AbstractService):
                     group_dict.pop("profile_pic_url")
 
         return linkedin_profile_clean
-
-    def _clean_profile_slug(self, profile_slug: str) -> str:
-        """
-        Cleans the LinkedIn profile slug. Removes the URL and trailing slash to keep only the "ID" part.
-
-        :param profile_slug: The LinkedIn profile slug.
-        :return: The cleaned LinkedIn profile slug.
-        """
-        # Remove the URL
-        clean_profile_slug = re.sub(r"^https_\w{2,3}_linkedin_\w{2,3}_in_", "", string=profile_slug)
-
-        # Remove the trailing slash
-        clean_profile_slug = clean_profile_slug.rstrip("/")
-
-        self.clean_profile_slug = clean_profile_slug
-        return clean_profile_slug
