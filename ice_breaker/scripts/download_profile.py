@@ -45,6 +45,10 @@ def download_profile(
     :param save_profile: Whether to save the profile or not.
     :param force_scraping: Whether to force scraping the profile or allow loading from the disk.
     :return: None
+
+    Example :
+    >>> ice-breaker download-profile linkedin https://www.linkedin.com/in/yann-lecun/
+    >>> ice-breaker download-profile twitter ylecun
     """
     logger.info(f"Downloading {service_name} {profile_id} profile...")
 
