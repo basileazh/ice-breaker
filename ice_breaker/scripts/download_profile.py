@@ -1,13 +1,8 @@
 from typing import Optional
-
 import click
 
-from ice_breaker.core.log import logger
-from ice_breaker.core.settings import get_settings
-from ice_breaker.services.service import get_service_class, get_services_list
-
-ENVIRONMENT = get_settings("environment")
-
+from ice_breaker.services.service import get_services_list
+from ice_breaker.get_profile import get_profile
 
 @click.command()
 @click.argument("service_name", type=click.Choice(get_services_list()))
@@ -17,11 +12,24 @@ ENVIRONMENT = get_settings("environment")
     "--folder_path",
     type=str,
     default=None,
-    help="The complete path to the profiles' folder. If not provided, the profile will be saved in the data_samples folder.",
+    help="The complete path to the profiles' folder. "
+         "If not provided, the profile will be saved in the data_samples folder.",
 )
-@click.option("--clean-profile/--no-clean-profile", is_flag=True, default=True, help="Whether to clean the profile or not.")
-@click.option("--save-profile/--no-save-profile", is_flag=True, default=True, help="Whether to save the profile or not.")
-@click.option("--force-scraping/--no-force-scraping", is_flag=True, default=False, help="Whether to save the profile or not.")
+@click.option(
+    "--clean-profile/--no-clean-profile",
+    is_flag=True,
+    default=True,
+    help="Whether to clean the profile or not.")
+@click.option(
+    "--save-profile/--no-save-profile",
+    is_flag=True,
+    default=True,
+    help="Whether to save the profile or not.")
+@click.option(
+    "--force-scraping/--no-force-scraping",
+    is_flag=True,
+    default=False,
+    help="Whether to save the profile or not.")
 def download_profile(
     service_name: str,
     profile_id: str,
@@ -50,25 +58,11 @@ def download_profile(
     >>> ice-breaker download-profile linkedin https://www.linkedin.com/in/yann-lecun/
     >>> ice-breaker download-profile twitter ylecun
     """
-    logger.info(f"Downloading {service_name} {profile_id} profile...")
-
-    logger.info("Service setting up...")
-    # Service set up
-    service = get_service_class(service_name)(
+    get_profile(
+        service_name=service_name,
         profile_id=profile_id,
-        environment=ENVIRONMENT,
-        profiles_path=folder_path,
-    )
-    logger.info(f"Service set up : {service}.")
-
-    logger.info(f"{service.service_name} {profile_id} profile downloading...")
-    # Download the profile from the service
-    profile = service.download_profile(
+        folder_path=folder_path,
         clean_profile=clean_profile,
         save_profile=save_profile,
-        force_scraping=force_scraping,
+        force_scraping=force_scraping
     )
-    logger.info("Profile downloaded successfully.")
-
-    logger.info(f"{service.service_name} {profile_id} profile downloaded : {profile}.")
-    logger.info(f"{service.service_name} {profile_id} profile downloaded to {service.profile_path}.")
