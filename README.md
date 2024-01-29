@@ -2,15 +2,24 @@
 
 ### Author : Basile EL AZHARI
 
-A GenAI application to gather information about a person, and find an ice breaker.
+A GenAI application to gather information about a person, and find an ice-breaker to start a conversation with them.
 
 This package is used in the Ice Breaker application, available at this website : XXXX
 
-You can also install the package locally to benefit from its functionalities
+You can also install the package locally to benefit from its functionalities :
+ - Find a LinkedIn link from a name
+ - Find a Twitter username from a name
+ - Download a LinkedIn/Twitter profile
+ - Generate an ice-breaker using profiles information
 
 
 
 ## Functionalities Overview
+
+### Ice breaker
+
+Using OpenAI GenAI SOTA algorithm, and given 1 or multiple profiles about a person, or even textual description, a complete piece of advice 
+about how to break the ice with this person when you meet or chat with them.
 
 ### Scraping
 
@@ -21,11 +30,6 @@ The package provides helper functions to scrape a public profile. Scraping may b
 Following services are supported :
 - LinkedIn
 - X (Twitter)
-
-### Ice breaker
-
-Given 1 or multiple profiles about a person, or even textual description, generate a complete piece of advice 
-about how to break the ice with this person when you meet or chat with them.
 
 
 
@@ -53,37 +57,47 @@ Retrieve you API keys in personal parameters.
 
 #### Add API keys to ice-breaker
 
-XXXXX export XXXXX
+> XXXXX export XXXXX
 
 
 ### Get an ice-breaker
+bash
+> XXXXXX ice-breaker get "Elon Musk SpaceX USA"
 
-XXXXXX ice-breaker get "Elon Musk SpaceX USA"
+python
+ADD HERE
+
 
 ### Other functionalities
 
 #### Download a profile given a name
 
-XXXXXX ice-breaker download-profile "Elon Musk SpaceX USA"
+> ice-breaker download-profile "Elon Musk SpaceX USA"
 
 #### Download a profile given a URL / username
 
-XXXXXX ice-breaker download-profile-id XXXXXXXX
+> ice-breaker download-profile linkedin https://www.linkedin.com/in/yann-lecun/ --force-scraping 
 
-#### Generate an ice breaker from JSON profiles / text
+> ice-breaker download-profile twitter ylecun --force-scraping
 
-From text / JSON file
 
-XXXXXX ice-breaker generate --json path_to_json_file
-XXXXXX ice-breaker generate --text path_to_text_file
+#### Generate an ice breaker from a profile saved as JSON / text
 
-From in-line text
+ - From text / JSON file
 
-XXXXXX ice-breaker generate --inline "Elon Musk is one of the most known... " 
+> XXXXXX ice-breaker get --profile-json path_to_json_file
 
-## Pull Requests
+> XXXXXX ice-breaker get --profile-text path_to_text_file
 
-Public pull requests are opened on this project, please proceed and I will review them.
+ - From in-line text
+
+> XXXXXX ice-breaker get --profile-inline "Elon Musk is one of the most known... " 
+
+
+
+## Development
+
+Public pull requests are opened and welcomed on this project, please proceed and I will review them.
 
 
 
