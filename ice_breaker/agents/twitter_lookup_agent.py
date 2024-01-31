@@ -1,6 +1,6 @@
 from langchain.agents import AgentType, Tool, initialize_agent
-from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate
+from langchain_community.chat_models import ChatOpenAI
 
 from ice_breaker.tools.tools import get_profile_url
 
