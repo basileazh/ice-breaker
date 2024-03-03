@@ -1,9 +1,6 @@
 from typing import Union
 
-import requests  # type: ignore
-
 from ice_breaker.core.log import logger
-from ice_breaker.core.settings import get_settings
 from ice_breaker.services.abstract_service import AbstractService
 
 
@@ -41,26 +38,8 @@ class TwitterService(AbstractService):
 
         :return: The LinkedIn profile information as a dictionary.
         """
-        logger.info(f"Scraping {self.profile_id} profile from LinkedIn via ProxyCurl...")
-
-        # Get the LinkedIn api endpoint and key
-        linkedin_api_endpoint = get_settings("linkedin_api_endpoint")
-        linkedin_api_key = get_settings("linkedin_api_key")
-
-        # Set the header
-        header_dict = {
-            "Authorization": f"Bearer {linkedin_api_key}",
-            "Content-Type": "application/json",
-        }
-
-        # Get the profile data from the API
-        response = requests.get(
-            linkedin_api_endpoint,
-            headers=header_dict,
-            params={"url": self.profile_id},
-        )
-
-        return response.json()
+        # TODO: Implement the Twitter profile scraping
+        return {"a": "b"}
 
     def _clean_profile(self, profile_data: dict[str, Union[str, dict[str, str]]]) -> dict[str, Union[str, dict[str, str]]]:
         """

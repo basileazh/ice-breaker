@@ -7,6 +7,25 @@ from ice_breaker.core.log import logger
 from ice_breaker.core.settings import get_settings
 from ice_breaker.services.abstract_service import AbstractService
 
+CLEAN_FIELDS = [
+    "public_identifier",
+    "profile_pic_url",
+    "first_name",
+    "last_name",
+    "full_name",
+    "headline",
+    "country",
+    "follower_count",
+    "summary",
+    "country_full_name",
+    "city",
+    "state",
+    "experiences",
+    "languages",
+    "education",
+    "skills",
+]
+
 
 class LinkedInService(AbstractService):
     """
@@ -42,26 +61,35 @@ class LinkedInService(AbstractService):
 
         :return: The LinkedIn profile information as a dictionary.
         """
-        logger.info(f"Scraping {self.profile_id} profile from LinkedIn via ProxyCurl...")
 
-        # Get the LinkedIn api endpoint and key
-        linkedin_api_endpoint = get_settings("linkedin_api_endpoint")
-        linkedin_api_key = get_settings("linkedin_api_key")
+        # Trying to load the profile from the database
+        try:
+            profile = self.load_profile()
+            logger.info(f"Profile {self.profile_id} found in the database.")
+        except FileNotFoundError:
+            logger.info(f"Profile {self.profile_id} not found in the database. Scraping it from LinkedIn...")
+            logger.info(f"Scraping {self.profile_id} profile from LinkedIn via ProxyCurl...")
 
-        # Set the header
-        header_dict = {
-            "Authorization": f"Bearer {linkedin_api_key}",
-            "Content-Type": "application/json",
-        }
+            # Get the LinkedIn api endpoint and key
+            linkedin_api_endpoint = get_settings("linkedin_api_endpoint")
+            linkedin_api_key = get_settings("linkedin_api_key")
 
-        # Get the profile data from the API
-        response = requests.get(
-            linkedin_api_endpoint,
-            headers=header_dict,
-            params={"url": self.profile_id},
-        )
+            # Set the header
+            header_dict = {
+                "Authorization": f"Bearer {linkedin_api_key}",
+                "Content-Type": "application/json",
+            }
 
-        return response.json()
+            # Get the profile data from the API
+            response = requests.get(
+                linkedin_api_endpoint,
+                headers=header_dict,
+                params={"url": self.profile_id},
+            )
+
+            profile = response.json()
+
+        return profile
 
     def _clean_profile(self, profile_data: dict[str, Union[str, dict[str, str]]]) -> dict[str, Union[str, dict[str, str]]]:
         """
@@ -71,14 +99,10 @@ class LinkedInService(AbstractService):
         :return: The cleaned LinkedIn profile information as a dictionary.
         """
         # Keeping only the needed fields
-        linkedin_profile_clean = {
-            k: v
-            for k, v in profile_data.items()
-            if v not in ["", [], None] and k not in ["people also viewed", "certifications"]
-        }
+        linkedin_profile_clean = {k: v for k, v in profile_data.items() if v not in ["", [], None] and k in CLEAN_FIELDS}
 
         # Remove profile_pic_url from groups
-        if linkedin_profile_clean["groups"] and isinstance(linkedin_profile_clean["groups"], list):
+        if "groups" in linkedin_profile_clean and isinstance(linkedin_profile_clean["groups"], list):
             for group_dict in linkedin_profile_clean["groups"]:
                 if "profile_pic_url" in group_dict:
                     group_dict.pop("profile_pic_url")

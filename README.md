@@ -18,13 +18,13 @@ You can also install the package locally to benefit from its functionalities :
 
 ### Ice breaker
 
-Using OpenAI GenAI SOTA algorithm, and given 1 or multiple profiles about a person, or even textual description, a complete piece of advice 
+Using OpenAI GenAI SOTA algorithm, and given 1 or multiple profiles about a person, or even textual description, a complete piece of advice
 about how to break the ice with this person when you meet or chat with them.
 
 ### Scraping
 
 The package provides helper functions to scrape a public profile. Scraping may be done providing :
-- only the name of the person, and eventually a few specific words. This uses GenAI to crawl the web 
+- only the name of the person, and eventually a few specific words. This uses GenAI to crawl the web
 - The direct link to profile or username
 
 Following services are supported :
@@ -40,13 +40,13 @@ To install the package, please download it via the following command :
 XXXXXXXX
 
 ### Set up API keys
-The following APIs are used in the project : 
-- ProxyCURL for LinkedIn profile scraping 
+The following APIs are used in the project :
+- ProxyCURL for LinkedIn profile scraping
 - APIfy for X (Twitter) profile scraping
 
 If you wish to use the scraping capabilities of the package (recommended), you must provide API keys to these services.
 
-#### Create scraping API accounts 
+#### Create scraping API accounts
 
 Please create accounts for ProxuCURL and APIfy to get your API keys, You should have free tokens at account creation.
 
@@ -76,22 +76,24 @@ ADD HERE
 
 #### Download a profile given a URL / username
 
-> ice-breaker download-profile linkedin https://www.linkedin.com/in/yann-lecun/ --force-scraping 
+> ice-breaker download-profile linkedin https://www.linkedin.com/in/yann-lecun/ --force-scraping
 
 > ice-breaker download-profile twitter ylecun --force-scraping
 
 
 #### Generate an ice breaker from a profile saved as JSON / text
 
- - From text / JSON file
+[//]: # ( - From text / JSON file)
 
 > XXXXXX ice-breaker get --profile-json path_to_json_file
 
-> XXXXXX ice-breaker get --profile-text path_to_text_file
+[//]: # (> XXXXXX ice-breaker get --profile-text path_to_text_file)
 
- - From in-line text
+[//]: # ()
+[//]: # ( - From in-line text)
 
-> XXXXXX ice-breaker get --profile-inline "Elon Musk is one of the most known... " 
+[//]: # ()
+[//]: # (> XXXXXX ice-breaker get --profile-inline "Elon Musk is one of the most known... " )
 
 
 
@@ -107,6 +109,6 @@ pytest tests
 
 
 
-## Contact 
+## Contact
 
 XXXXX

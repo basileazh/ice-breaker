@@ -34,7 +34,7 @@ def test_scrape_profile_production(monkeypatch):
 
     monkeypatch.setattr(TestableAbstractService, "_scrape_profile_production", mock_scrape)
     service = TestableAbstractService("test_id", "production", "/test/path")
-    result = service.scrape_profile()
+    result = service.scrape_profile(clean_profile=False)
     assert result == {"data": "production data"}
 
 
@@ -44,7 +44,7 @@ def test_scrape_profile_development(monkeypatch, service_development):
 
     monkeypatch.setattr(TestableAbstractService, "_load_profile", mock_scrape)
     service = service_development
-    result = service.scrape_profile()
+    result = service.scrape_profile(clean_profile=False)
     assert result == {"data": "development data"}
 
 

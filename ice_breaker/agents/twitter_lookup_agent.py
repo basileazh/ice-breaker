@@ -1,6 +1,6 @@
 from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.prompts.chat import ChatPromptTemplate
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai.chat_models import ChatOpenAI
 
 from ice_breaker.tools.tools import get_profile_url
 
@@ -9,11 +9,14 @@ from ice_breaker.tools.tools import get_profile_url
 
 def lookup(profile_name: str) -> str:
     """
-    Returns the LinkedIn profile URL for a given name.
+    Returns the Twitter profile username for a given name.
 
     :param profile_name: The name to lookup.
-    :return: The LinkedIn profile URL.
+    :return: The Twitter profile username.
     """
+
+    # Adding "Twitter" to the profile name to get better results
+    profile_name = f"{profile_name} Twitter"
 
     # Define the prompt template
     template = """

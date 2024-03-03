@@ -82,30 +82,34 @@ class AbstractService:
 
         return profile_data
 
-    def scrape_profile(self, force_scraping: bool = False) -> dict[str, Union[str, dict[str, str]]]:
+    def scrape_profile(self, clean_profile: bool = True, force_scraping: bool = False) -> dict[str, Union[str, dict[str, str]]]:
         """
         Retrieves the profile and returns the information as a dictionary. Depending on the environment,
         the profile is either scraped or loaded from local.
 
         :param force_scraping: Whether to force the scraping using API or not
+        :param clean_profile: Whether to clean the profile or not
         :return: A dict containing profile information.
         """
         logger.info(f"Scraping {self.profile_id} profile...")
 
         # Scrape the profile data depending on the environment
         if (self.environment == "production") | force_scraping:
-            profile_data = self._scrape_profile_production()
+            self.profile_data = self._scrape_profile_production()
         elif self.environment == "development":
-            profile_data = self._scrape_profile_development()
+            self.profile_data = self._scrape_profile_development()
         else:
             raise ValueError(f"Unknown environment '{self.environment}'")
 
+        # Clean the profile
+        if clean_profile:
+            logger.info("Cleaning profile...")
+            self.clean_profile()
+
         logger.info("Scraped profile data.")
-        logger.debug(f"Scraped {self.profile_id} profile : {profile_data}.")
+        logger.debug(f"Scraped {self.profile_id} profile : {self.profile_data}.")
 
-        self.profile_data = profile_data
-
-        return profile_data
+        return self.profile_data
 
     def _clean_profile(self, profile_data: dict[str, Union[str, dict[str, str]]]) -> dict[str, Union[str, dict[str, str]]]:
         """
